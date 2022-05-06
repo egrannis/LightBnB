@@ -5,10 +5,10 @@
 -- Include DROP TABLE statements at the top of the file so that you can re-run the file easily. 
 -- DROP TABLE will prevent errors/warnings as we try to re-run the 01_schema.sql file. Here's a tip on the syntax for dropping a table if it exists and its dependent objects (CASCADE keyword):
 
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS properties CASCADE;
-DROP TABLE IF EXISTS reservations CASCADE;
-DROP TABLE IF EXISTS property_reviews CASCADE;
+-- DROP TABLE IF EXISTS users CASCADE;
+-- DROP TABLE IF EXISTS properties CASCADE;
+-- DROP TABLE IF EXISTS reservations CASCADE;
+-- DROP TABLE IF EXISTS property_reviews CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
