@@ -9,10 +9,6 @@ const pool = new Pool({
   database: 'lightbnb'
 });
 
-// the following assumes that you named your connection variable `pool`
-pool.query(`SELECT title FROM properties LIMIT 10;`)
-  .then(response => { console.log(response) }); // want response.rows
-
 /// Users
 
 /**
@@ -39,8 +35,16 @@ exports.getUserWithEmail = getUserWithEmail;
  * @param {string} id The id of the user.
  * @return {Promise<{}>} A promise to the user.
  */
-const getUserWithId = function (id) {
-  return Promise.resolve(users[id]);
+
+const getUserWithId = (id) => {
+  return pool.query(`SELECT * from users WHERE users.id = $1`, [id])
+    .then((result) => {
+      console.log(result.rows[0]);
+      return result.rows[0];
+    })
+    .catch((err) => {
+      return null;
+    });
 }
 exports.getUserWithId = getUserWithId;
 
