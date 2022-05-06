@@ -54,12 +54,7 @@ exports.getUserWithId = getUserWithId;
  * @param {{name: string, password: string, email: string}} user// accepts a user object and insert into DB
  * @return {Promise<{}>} A promise to the user.
  */
-// const addUser = function (user) {
-//   const userId = Object.keys(users).length + 1;
-//   user.id = userId;
-//   users[userId] = user;
-//   return Promise.resolve(user);
-// }
+
 const addUser = (user) => {
   return pool.query(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *`, [user.name, user.email, user.password])
     .then((result) => {
@@ -70,7 +65,6 @@ const addUser = (user) => {
       return null;
     });
 }
-
 exports.addUser = addUser;
 
 /// Reservations
