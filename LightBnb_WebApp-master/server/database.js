@@ -20,18 +20,18 @@ pool.query(`SELECT title FROM properties LIMIT 10;`)
  * @param {String} email The email of the user.
  * @return {Promise<{}>} A promise to the user.
  */
-const getUserWithEmail = function (email) {
-  let user;
-  for (const userId in users) {
-    user = users[userId];
-    if (user.email.toLowerCase() === email.toLowerCase()) {
-      break;
-    } else {
-      user = null;
-    }
-  }
-  return Promise.resolve(user);
+
+const getUserWithEmail = (email) => {
+  return pool.query(`SELECT * from users WHERE users.email = $1`, [email])
+    .then((result) => {
+      console.log(result.rows[0]);
+      return result.rows[0];
+    })
+    .catch((err) => {
+      return null;
+    });
 }
+
 exports.getUserWithEmail = getUserWithEmail;
 
 /**
